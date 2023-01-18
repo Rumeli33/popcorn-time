@@ -1,11 +1,12 @@
 import "./Header.css"
 
 
-function Header() {
+function Header(props) {
   return (
     <div className="Header">
       <h1>Popcorn Time</h1>
-      <p>Header contents</p>
+     
+      <h2> the current number of movies :{props.moviesArr.length}</h2>;
     </div>
   );
 }
