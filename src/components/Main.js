@@ -2,7 +2,7 @@ import "./Main.css";
 
 import { Movie } from "./Movie";
 
- export default function Main(props) {
+ function Main(props) {
 
 
 
@@ -18,19 +18,20 @@ import { Movie } from "./Movie";
   return (
     <div className="Main">
       {titleMessage}
-      {props.moviesArr.map((movieObj) => {
+      {props.moviesArr.map((movieObj,index) => {
         return (
-          <>    {/*we pass as props movieDetails and also the reference of the delete function */}
-                        <Movie
-                        key ={movieObj.id} 
-                        movieDetails ={movieObj} 
-                        deleteMovieCB={props.deleteMovieCB}/>
-                        {/* <button onClick={() => { deleteMovie(movieObj.id) }}>Delete this movie</button> */}
-                    </>
+          <Movie 
+            key={index} 
+            movieDetails={movieObj} 
+            callbackToDelete={props.callbackToDelete} />
+        );
                    
     
-  );
-})}
-</div> )}
+      })}
+
+      
+</div>
+)}
+export default Main;
 
 
