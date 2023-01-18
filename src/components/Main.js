@@ -1,14 +1,20 @@
 import "./Main.css";
 import moviesFromJson from "../data/movies.json";
+import { Movie } from "./Movie";
 import { useState } from "react";
-function Main() {
+ export default function Main() {
+//state declaration
+
   const [moviesArr, setMoviesArr] = useState(moviesFromJson);
 
+// delete function
+
   const deleteMovie = (id) => {
-    console.log("deleting a movie...", id);
-    const newListOfMovies = moviesArr.filter((movie) => {
+//calc the new list of movies
+ const newListOfMovies = moviesArr.filter((movie) => {
       return movie.id !== id;
     });
+    //update state
     setMoviesArr(newListOfMovies);
     console.log(newListOfMovies);
   };
@@ -24,47 +30,19 @@ function Main() {
   return (
     <div className="Main">
       {titleMessage}
-      {moviesArr.map((movieDetails) => {
+      {moviesArr.map((movieObj) => {
         return (
-          <div key={movieDetails.id} className="card card-movie">
-            <h3> {movieDetails.title}</h3>
-            <h4> Movie rating :</h4>
-            <span> {movieDetails.rating}</span> <br /><br />
-
-   {/*  Conditional Rendering with "Logical && Operator"  */}
-
-        { movieDetails.rating >= 8 &&  <span className="badge">!!!Recommended!!!</span>}
-
-            <p>Year: {movieDetails.year}</p>
-            <br />
-
-    {/*  Conditional Rendering with "Ternary Operator"  */}
-            { movieDetails.imgURL 
-              ? <img src={movieDetails.imgURL} alt="" /> 
-              : <img src="https://via.placeholder.com/182x268" alt =""/>
-            }
-
-<br/>
-
-
-            Genre: <br /> <br />
-            {movieDetails.genres.map((elm) => {
-              return <span>{elm}</span>;
-            })}
-            <br /> <br />
-            <button
-              className="btn"
-              onClick={() => {
-                deleteMovie(movieDetails.id);
-              }}
-            >
-              Delete Movie
-            </button>
-          </div>
-        );
-      })}
-    </div>
+          <>    {/*we pass as props movieDetails and also the reference of the delete function */}
+                        <Movie
+                        key ={movieObj.id} 
+                        movieDetails ={movieObj} 
+                        deleteMovieCB={deleteMovie}/>
+                        {/* <button onClick={() => { deleteMovie(movieObj.id) }}>Delete this movie</button> */}
+                    </>
+                   
+    
   );
-}
+})}
+</div> )}
 
-export default Main;
+
